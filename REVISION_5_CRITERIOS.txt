@@ -1,0 +1,25 @@
+REVISIÓN DEL PROTOTIPO TAYTA — CINCO CRÍTICAS Y CORRECCIONES
+
+1. PUBLICACIÓN QUE NO SE DESCUBRE
+Problema: se guardaba una clase, pero el inicio y Explorar solo leían tarjetas de ejemplo. El usuario interpretaba que no se publicó.
+Cambio: los catálogos cargan las publicaciones locales antes de preparar búsquedas y filtros. La clase aparece en Inicio, Explorar y la modalidad correspondiente. Las clases con Ambas aparecen en virtual y presencial.
+
+2. PUBLICACIONES SIN ADMINISTRACIÓN
+Problema: el creador no podía corregir errores ni retirar su publicación.
+Cambio: botones Editar y Eliminar en Mis clases y en el detalle propio. Editar conserva el identificador y sustituye los datos, sin duplicar la publicación. La eliminación requiere confirmación y desaparece de los catálogos al volver a cargarlos.
+
+3. PERFIL POCO CLARO
+Problema: no se veía con qué perfil se publicaba; al salir y crear otro podía parecer que se habían perdido las clases.
+Cambio: Iniciar sesión sin perfil activo, nombre visible cuando hay sesión local. Un correo de ejemplo ya registrado recupera su identificador en este navegador. La edición y eliminación comprueban que el perfil activo corresponde al autor.
+Límite: estos perfiles son demostrativos y no tienen contraseña ni autenticación real. Esa comprobación local no sustituye permisos en un servidor.
+
+4. FILTROS DESCONECTADOS DE LOS CAMBIOS
+Problema: una clase nueva no participaba en la búsqueda; al cambiar modalidades o distritos podían quedar resultados inconsistentes.
+Cambio: tarjetas locales con los mismos datos que las de ejemplo; búsqueda por contenido y autor, categoría, modalidad, precio, duración y distritos añadidos por el profesor. Favoritos también incluye publicaciones locales. Al volver con el historial del navegador, la página se vuelve a cargar para evitar datos anteriores a una edición o eliminación.
+
+5. ACCIONES Y MENSAJES CONFUSOS
+Problema: Entrar era poco específico, no había confirmación de eliminación y el usuario tenía pocas señales de guardado.
+Cambio: Iniciar sesión, nombre del perfil, Guardar cambios, mensajes de resultado y diálogo con Cancelar/Eliminar. Se conserva Publicar clase sin una pantalla de vista previa. Se mantiene el responsive y se adaptan los botones de administración.
+
+VERIFICACIÓN
+Se probó con datos ficticios: nueva publicación y búsqueda, aparición en inicio, cambio de título/precio/modalidad, exclusión del catálogo incorrecto, favoritos de una publicación nueva, retorno al mismo perfil, bloqueo de edición desde otro perfil, cancelar una eliminación y confirmar su eliminación. Se conserva la limitación de prueba de selección de archivos por permisos del navegador.

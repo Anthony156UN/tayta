@@ -1,0 +1,70 @@
+TAYTA CORREGIDO — PAQUETE 2026.11.03.5
+
+ACTUALIZA TODOS LOS ARCHIVOS
+Las capturas reportadas mostraban una versión anterior: una clase estaba guardada pero no aparecían Editar y Eliminar. Este paquete contiene la integración completa del catálogo y rutas de CSS/JS con versión para evitar cargar scripts antiguos.
+
+1. Extrae este ZIP en una carpeta nueva.
+2. En el hosting reemplaza TODOS los HTML y las carpetas js, css y assets de TAYTA, manteniendo el mismo dominio y ubicación. No basta con reemplazar index.html.
+3. Abre la misma dirección en el mismo navegador y pulsa Ctrl+F5.
+4. En Mis clases deben aparecer Editar y Eliminar debajo de cada publicación propia. Si faltan, sigues viendo archivos anteriores.
+5. No borres los datos del sitio ni el almacenamiento del navegador: allí están las publicaciones de práctica.
+
+TAYTA V4 — PUBLICACIÓN Y GESTIÓN DE CLASES
+
+ABRIR Y EDITAR
+Extrae el ZIP en una carpeta NUEVA. En Visual Studio Code usa Archivo > Abrir carpeta. Abre index.html con Live Server o sube el proyecto a un hosting. Los HTML contienen el contenido dentro de body; css/estilos.css contiene el diseño y js contiene las interacciones. No necesitas npm ni compilación.
+
+RECORRIDO PRINCIPAL
+1. Pulsa Entrar y crea un perfil de prueba con un nombre y un correo de ejemplo.
+2. Pulsa Publicar clase.
+3. Escribe título, descripción, categoría y duración.
+4. Elige foto opcional, Virtual, Presencial o Ambas y los precios correspondientes.
+5. Pulsa Publicar clase. Se guarda directamente y aparece en Mis clases, sin pantalla de vista previa.
+También puedes completar primero el formulario; al publicar sin perfil se guarda un borrador local para volver después del registro.
+
+CAMBIOS
+Registro de prueba muy sencillo. No pide contraseña ni verifica correos.
+Botón Publicar clase visible en la cabecera y en el formulario.
+La foto es opcional; admite selección o arrastre de JPG, PNG o WebP hasta 8 MB. Se muestra el nombre del archivo seleccionado, sin una pantalla de previsualización.
+Foto y clase se guardan en IndexedDB del navegador. Si no eliges foto se utiliza una imagen ilustrativa por categoría.
+Sin carga de videos ni video de fondo en el formulario de publicación. Esas funciones quedan para después. El aula de ejemplo anterior sigue separada del nuevo recorrido.
+Ambas significa que se puede ofrecer la misma clase como virtual o presencial, con precios independientes.
+
+QUÉ ES LOCAL
+Perfiles, borrador y publicaciones se guardan SOLO en este navegador y en este origen web. No se sincronizan con otros dispositivos, navegadores o visitantes. Borrar los datos del sitio borra estas pruebas. Cambiar de dirección (por ejemplo de Live Server al hosting) usa otro almacenamiento.
+Los perfiles no son cuentas autenticadas. No hay control de acceso real ni recuperación de cuentas. Usa datos de ejemplo. Salir del perfil no elimina sus clases, pero no las presenta como propias al crear otro perfil.
+No hay pagos, reservas, envíos al servidor ni publicación pública real. Para que otros usuarios vean y creen clases reales se necesita backend, base de datos, autenticación y almacenamiento del servidor.
+No uses contraseñas reales ni datos privados en esta práctica.
+
+SUBIR A HOSTING
+1. Guarda una copia de la versión anterior.
+2. Abre el Administrador de archivos del hosting.
+3. Sube este ZIP a public_html y extráelo allí.
+4. Comprueba que index.html está directamente en public_html, con css, js, assets y las demás páginas HTML.
+5. Abre tu dominio. Usa HTTPS cuando el hosting lo tenga disponible.
+Puedes borrar del hosting el ZIP una vez extraído; no hace falta dejarlo descargable para los visitantes.
+No necesita base de datos para estas pruebas locales. El hosting sirve los archivos; no conserva las publicaciones de los visitantes.
+
+DÓNDE EDITAR
+index.html: inicio.
+ensenar.html: formulario de publicación.
+registro.html: perfil de prueba.
+mis-clases.html: lista de publicaciones locales.
+mi-clase.html: detalle de una publicación local.
+css/estilos.css: diseño y responsive.
+js/almacenamiento.js: IndexedDB y operaciones de guardado.
+js/publicar.js: modalidad, foto y publicación directa.
+js/perfil.js: registro local.
+js/clases-locales.js: listado y detalle de publicaciones.
+js/interacciones.js: catálogo de ejemplo, filtros y favoritos.
+
+VERIFICACIONES
+Registro local, conservación de formulario al crear perfil, publicación directa sin foto, lista de clases y detalle; sintaxis JavaScript y enlaces locales. La carga de archivos por navegador no se volvió a intentar tras el rechazo de permiso de la prueba anterior; selección y arrastre de foto deben comprobarse manualmente en tu equipo.
+Las fotografías de muestra son ilustrativas de Unsplash. Los profesores, horarios y precios de catálogo son ficticios.
+
+ACTUALIZACIÓN V4
+Las clases publicadas localmente ya aparecen en el inicio y los catálogos, con búsqueda, filtros y favoritos. En Mis clases y en el detalle propio aparecen Editar y Eliminar. Guardar cambios mantiene el mismo identificador. Eliminar solicita confirmación.
+Sin perfil activo se muestra Iniciar sesión; con perfil se muestra su nombre. Usa el mismo correo de ejemplo para recuperar tu perfil local. La cuenta no está autenticada: no utiliza contraseña y no sirve para proteger datos reales.
+Al editar una clase ajena desde la interfaz, se deniega el guardado. Para seguridad real habrá que comprobar permisos y sesiones en el servidor.
+Para actualizar conserva el mismo dominio y navegador. Extrae el ZIP nuevo en el hosting reemplazando archivos; no borres los datos del sitio en el navegador. La actualización conserva las publicaciones locales existentes. Si abres otra dirección, puerto, navegador o dispositivo, los datos pertenecen a otro almacenamiento.
+Consulta REVISION_5_CRITERIOS.txt para el diagnóstico y las correcciones.

@@ -1,0 +1,239 @@
+<!doctype html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta
+      content="TAYTA: descubre clases, comparte tu experiencia y aprende algo nuevo. Prototipo interactivo."
+      name="description"
+    />
+    <title>TAYTA · Aula de práctica</title>
+    <link href="css/estilos.css?v=20261103-5" rel="stylesheet" />
+    <meta content="2026.11.03.5" name="tayta-version" />
+  </head>
+  <body data-pagina="ensenar">
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <header>
+      <a class="brand" href="index.html">
+        <span class="brandmark">✺</span>
+        TAYTA
+        <span class="tagline">EL QUE SABE, ENSEÑA</span>
+      </a>
+      <form action="explorar.html" class="search" id="searchform" method="get">
+        <span>⌕</span>
+        <input
+          aria-label="Buscar clases"
+          id="search"
+          name="q"
+          placeholder="¿Qué te gustaría aprender?"
+        />
+        <kbd>↵</kbd>
+      </form>
+      <a class="teach topteach" href="ensenar.html">
+        Quiero enseñar
+        <span>↗</span>
+      </a>
+      <a
+        aria-label="Iniciar sesión"
+        class="account-link"
+        data-account=""
+        href="registro.html"
+      >
+        Iniciar sesión
+      </a>
+    </header>
+    <aside>
+      <nav>
+        <span class="navlabel">DESCUBRE TAYTA</span>
+        <a data-nav="inicio" href="index.html">
+          ⌂
+          <span>Inicio</span>
+        </a>
+        <a data-nav="explorar" href="explorar.html">
+          ⌕
+          <span>Explorar clases</span>
+        </a>
+        <a data-nav="virtual" href="virtual.html">
+          ▣
+          <span>TAYTA Virtual</span>
+        </a>
+        <a data-nav="presencial" href="presencial.html">
+          ⌖
+          <span>TAYTA Presencial</span>
+        </a>
+        <div class="navdivider"></div>
+        <span class="navlabel">TU ESPACIO</span>
+        <a data-nav="favoritos" href="favoritos.html">
+          ♡
+          <span>Mis favoritos</span>
+          <small id="favcount">0</small>
+        </a>
+        <a data-nav="reservas" href="reservas.html">
+          ▦
+          <span>Mis reservas</span>
+        </a>
+        <a data-nav="ensenar" href="ensenar.html">
+          ＋
+          <span>Quiero enseñar</span>
+        </a>
+      </nav>
+      <div class="sidecard">
+        <span>
+          Lo que sabes
+          <br />
+          puede inspirar.
+        </span>
+        <p>Comparte tu experiencia con alguien más.</p>
+        <a href="ensenar.html">Empieza a enseñar ↗</a>
+      </div>
+      <div class="sidebottom">
+        <button id="contrast">◐ Contraste</button>
+        <button aria-label="Cambiar tamaño de texto" id="textsize">A+</button>
+        <p>
+          Hecho para aprender juntos.
+          <br />
+          <b>Desde Perú, con experiencia.</b>
+        </p>
+      </div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <a class="back" href="virtual.html">← Volver a clases virtuales</a>
+      <div class="pagehead">
+        <span class="eyebrow">TU ESPACIO PARA APRENDER</span>
+        <h1 id="lesson-title">Acuarela: empieza con una hoja en blanco</h1>
+        <p>
+          Con
+          <span id="lesson-teacher">Carmen Torres</span>
+          · Clase grabada
+        </p>
+      </div>
+      <div class="notice">
+        Recorrido de práctica: prueba el tipo de acceso y reproduce un video de
+        tu dispositivo. No se cobra ni se activa una suscripción real.
+      </div>
+      <div class="learning-layout">
+        <section class="panel">
+          <img
+            alt="Materiales de la clase, fotografía ilustrativa"
+            class="detailimage"
+            id="lesson-cover"
+            src="assets/arte.jpg"
+          />
+          <div id="player-locked">
+            <h2>Elige cómo quieres aprender.</h2>
+            <p>
+              La compra da acceso a esta clase con un pago. La suscripción de
+              ejemplo ofrece acceso mientras esté activa; no incluye clases
+              presenciales ni todo el catálogo.
+            </p>
+          </div>
+          <div hidden="" id="student-player-section">
+            <h2>Tu aula de prueba</h2>
+            <p id="access-status" role="status"></p>
+            <label for="student-video">
+              Elige un video propio para probar el reproductor
+            </label>
+            <input
+              accept="video/mp4,video/webm"
+              id="student-video"
+              type="file"
+            />
+            <p class="field-help">
+              MP4 o WebM · Hasta 100 MB. El archivo se reproduce localmente y no
+              se envía al profesor ni a TAYTA.
+            </p>
+            <p class="field-error" id="student-video-error" role="alert"></p>
+            <video
+              controls=""
+              hidden=""
+              id="student-player"
+              playsinline=""
+              preload="metadata"
+            ></video>
+            <button class="outline" id="reset-access" type="button">
+              Restablecer prueba
+            </button>
+          </div>
+          <h2>Qué aprenderás</h2>
+          <ul id="lesson-goals">
+            <li>Controlar la cantidad de agua.</li>
+            <li>Mezclar colores básicos.</li>
+            <li>Pintar hojas con pinceladas simples.</li>
+          </ul>
+        </section>
+        <aside class="panel access-panel">
+          <span class="eyebrow">ACCESO A ESTA CLASE · EJEMPLO</span>
+          <h2>Aprende a tu ritmo.</h2>
+          <fieldset class="plan-options">
+            <legend>Elige una opción de prueba</legend>
+            <label class="plan-option" for="plan-purchase">
+              <input
+                checked=""
+                id="plan-purchase"
+                name="plan"
+                type="radio"
+                value="compra"
+              />
+              <span>
+                <strong>Compra individual</strong>
+                <b>
+                  S/
+                  <span id="purchase-amount">20</span>
+                  <small>un solo pago</small>
+                </b>
+                <span>Acceso al video de esta clase.</span>
+              </span>
+            </label>
+            <label class="plan-option" for="plan-monthly">
+              <input
+                id="plan-monthly"
+                name="plan"
+                type="radio"
+                value="suscripcion"
+              />
+              <span>
+                <strong>Suscripción a esta clase</strong>
+                <b>
+                  S/ 15
+                  <small>por mes</small>
+                </b>
+                <span>Acceso mientras la suscripción esté activa.</span>
+              </span>
+            </label>
+          </fieldset>
+          <p class="field-help">
+            Precios demostrativos. En una versión real, se mostrarán las
+            condiciones y la renovación antes de pagar.
+          </p>
+          <button class="primary" id="simulate-access" type="button">
+            Revisar acceso de prueba →
+          </button>
+          <section class="access-review" hidden="" id="access-review">
+            <h3>Revisa tu elección</h3>
+            <p id="access-summary"></p>
+            <p>
+              Esta confirmación solo habilita una prueba local del reproductor.
+            </p>
+            <button class="outline" id="confirm-access" type="button">
+              Confirmar simulación
+            </button>
+          </section>
+        </aside>
+      </div>
+    </main>
+    <footer>
+      ✺ TAYTA
+      <span>El conocimiento nos conecta.</span>
+    </footer>
+    <div id="toast" role="status"></div>
+    <dialog id="dialog">
+      <button aria-label="Cerrar" class="close">×</button>
+      <div id="dialogcontent"></div>
+    </dialog>
+    <script defer="" src="js/almacenamiento.js?v=20261103-5"></script>
+    <script defer="" src="js/catalogo-local.js?v=20261103-5"></script>
+    <script defer="" src="js/interacciones.js?v=20261103-5"></script>
+    <script defer="" src="js/aula.js?v=20261103-5"></script>
+  </body>
+</html>

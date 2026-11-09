@@ -1,0 +1,188 @@
+<!doctype html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta
+      content="TAYTA: descubre clases, comparte tu experiencia y aprende algo nuevo. Prototipo interactivo."
+      name="description"
+    />
+    <title>TAYTA · Profesor madera</title>
+    <link href="css/estilos.css?v=20261103-5" rel="stylesheet" />
+    <meta content="2026.11.03.5" name="tayta-version" />
+  </head>
+  <body data-pagina="profesor">
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <header>
+      <a class="brand" href="index.html">
+        <span class="brandmark">✺</span>
+        TAYTA
+        <span class="tagline">EL QUE SABE, ENSEÑA</span>
+      </a>
+      <form action="explorar.html" class="search" id="searchform" method="get">
+        <span>⌕</span>
+        <input
+          aria-label="Buscar clases"
+          id="search"
+          name="q"
+          placeholder="¿Qué te gustaría aprender?"
+        />
+        <kbd>↵</kbd>
+      </form>
+      <a class="teach topteach" href="ensenar.html">Publicar clase ↗</a>
+      <a
+        aria-label="Iniciar sesión"
+        class="account-link"
+        data-account=""
+        href="registro.html"
+      >
+        Iniciar sesión
+      </a>
+    </header>
+    <aside>
+      <nav>
+        <span class="navlabel">DESCUBRE TAYTA</span>
+        <a data-nav="inicio" href="index.html">
+          ⌂
+          <span>Inicio</span>
+        </a>
+        <a data-nav="explorar" href="explorar.html">
+          ⌕
+          <span>Explorar clases</span>
+        </a>
+        <a data-nav="virtual" href="virtual.html">
+          ▣
+          <span>TAYTA Virtual</span>
+        </a>
+        <a data-nav="presencial" href="presencial.html">
+          ⌖
+          <span>TAYTA Presencial</span>
+        </a>
+        <div class="navdivider"></div>
+        <span class="navlabel">TU ESPACIO</span>
+        <a data-nav="favoritos" href="favoritos.html">
+          ♡
+          <span>Mis favoritos</span>
+          <small id="favcount">0</small>
+        </a>
+        <a data-nav="reservas" href="reservas.html">
+          ▦
+          <span>Mis reservas</span>
+        </a>
+        <a data-nav="ensenar" href="ensenar.html">
+          ＋
+          <span>Quiero enseñar</span>
+        </a>
+        <a data-nav="mis-clases" href="mis-clases.html">
+          ▤
+          <span>Mis clases</span>
+        </a>
+      </nav>
+      <div class="sidecard">
+        <span>
+          Lo que sabes
+          <br />
+          puede inspirar.
+        </span>
+        <p>Comparte tu experiencia con alguien más.</p>
+        <a href="ensenar.html">Empieza a enseñar ↗</a>
+      </div>
+      <div class="sidebottom">
+        <button id="contrast">◐ Contraste</button>
+        <button aria-label="Cambiar tamaño de texto" id="textsize">A+</button>
+        <p>
+          Hecho para aprender juntos.
+          <br />
+          <b>Desde Perú, con experiencia.</b>
+        </p>
+      </div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <a class="back" href="clase-madera.html">← Volver a la clase</a>
+      <div class="teacherhero">
+        <span class="miniavatar">RS</span>
+        <div>
+          <span class="eyebrow">PERFIL DE DEMOSTRACIÓN</span>
+          <h1 class="teacher-name">Ricardo Salazar</h1>
+          <p>Oficios · Lima, Perú</p>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>La experiencia se comparte</h2>
+        <p>Carpintero de oficio, con 25 años de experiencia en su taller.</p>
+        <p>
+          En mis clases empezamos por lo básico y practicamos paso a paso.
+          Puedes preguntar y aprender a tu ritmo.
+        </p>
+      </div>
+      <div class="sectionhead"><h2>Aprende con Ricardo</h2></div>
+      <div class="grid">
+        <article
+          class="card"
+          data-categoria="Oficios"
+          data-distrito="San Miguel"
+          data-duracion="90"
+          data-id="madera"
+          data-modalidad="presencial"
+          data-posicion="0"
+          data-precio="40"
+        >
+          <div class="cover">
+            <a
+              aria-label="Ver clase: Tu primer proyecto en madera"
+              href="clase-madera.html"
+            >
+              <img
+                alt="Oficios: fotografía ilustrativa"
+                loading="lazy"
+                src="assets/madera.jpg"
+              />
+            </a>
+            <span class="badge">⌖ Presencial</span>
+            <button
+              aria-label="Guardar en favoritos: Tu primer proyecto en madera"
+              aria-pressed="false"
+              class="heart"
+              data-fav="madera"
+            >
+              ♡
+            </button>
+          </div>
+          <div class="cardbody">
+            <span class="cattext">Oficios</span>
+            <h3>
+              <a href="clase-madera.html">Tu primer proyecto en madera</a>
+            </h3>
+            <a class="teacherline" href="profesor-madera.html">
+              <span class="miniavatar">RS</span>
+              Ricardo Salazar
+            </a>
+            <div class="cardbottom">
+              <span>◷ 90 min · San Miguel</span>
+              <span class="price">
+                S/ 40
+                <small>/ clase</small>
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="notice" hidden="" id="sin-resultados">
+        No hay clases que coincidan. Prueba otra búsqueda o categoría.
+      </p>
+    </main>
+    <footer>
+      ✺ TAYTA
+      <span>El conocimiento nos conecta.</span>
+    </footer>
+    <div id="toast" role="status"></div>
+    <dialog id="dialog">
+      <button aria-label="Cerrar" class="close">×</button>
+      <div id="dialogcontent"></div>
+    </dialog>
+    <script defer="" src="js/almacenamiento.js?v=20261103-5"></script>
+    <script defer="" src="js/catalogo-local.js?v=20261103-5"></script>
+    <script defer="" src="js/interacciones.js?v=20261103-5"></script>
+  </body>
+</html>

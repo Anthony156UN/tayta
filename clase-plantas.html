@@ -1,0 +1,186 @@
+<!doctype html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta
+      content="TAYTA: descubre clases, comparte tu experiencia y aprende algo nuevo. Prototipo interactivo."
+      name="description"
+    />
+    <title>TAYTA · Clase plantas</title>
+    <link href="css/estilos.css?v=20261103-5" rel="stylesheet" />
+    <meta content="2026.11.03.5" name="tayta-version" />
+  </head>
+  <body data-pagina="clase">
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <header>
+      <a class="brand" href="index.html">
+        <span class="brandmark">✺</span>
+        TAYTA
+        <span class="tagline">EL QUE SABE, ENSEÑA</span>
+      </a>
+      <form action="explorar.html" class="search" id="searchform" method="get">
+        <span>⌕</span>
+        <input
+          aria-label="Buscar clases"
+          id="search"
+          name="q"
+          placeholder="¿Qué te gustaría aprender?"
+        />
+        <kbd>↵</kbd>
+      </form>
+      <a class="teach topteach" href="ensenar.html">Publicar clase ↗</a>
+      <a
+        aria-label="Iniciar sesión"
+        class="account-link"
+        data-account=""
+        href="registro.html"
+      >
+        Iniciar sesión
+      </a>
+    </header>
+    <aside>
+      <nav>
+        <span class="navlabel">DESCUBRE TAYTA</span>
+        <a data-nav="inicio" href="index.html">
+          ⌂
+          <span>Inicio</span>
+        </a>
+        <a data-nav="explorar" href="explorar.html">
+          ⌕
+          <span>Explorar clases</span>
+        </a>
+        <a data-nav="virtual" href="virtual.html">
+          ▣
+          <span>TAYTA Virtual</span>
+        </a>
+        <a data-nav="presencial" href="presencial.html">
+          ⌖
+          <span>TAYTA Presencial</span>
+        </a>
+        <div class="navdivider"></div>
+        <span class="navlabel">TU ESPACIO</span>
+        <a data-nav="favoritos" href="favoritos.html">
+          ♡
+          <span>Mis favoritos</span>
+          <small id="favcount">0</small>
+        </a>
+        <a data-nav="reservas" href="reservas.html">
+          ▦
+          <span>Mis reservas</span>
+        </a>
+        <a data-nav="ensenar" href="ensenar.html">
+          ＋
+          <span>Quiero enseñar</span>
+        </a>
+        <a data-nav="mis-clases" href="mis-clases.html">
+          ▤
+          <span>Mis clases</span>
+        </a>
+      </nav>
+      <div class="sidecard">
+        <span>
+          Lo que sabes
+          <br />
+          puede inspirar.
+        </span>
+        <p>Comparte tu experiencia con alguien más.</p>
+        <a href="ensenar.html">Empieza a enseñar ↗</a>
+      </div>
+      <div class="sidebottom">
+        <button id="contrast">◐ Contraste</button>
+        <button aria-label="Cambiar tamaño de texto" id="textsize">A+</button>
+        <p>
+          Hecho para aprender juntos.
+          <br />
+          <b>Desde Perú, con experiencia.</b>
+        </p>
+      </div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <a class="back" href="explorar.html">← Volver a explorar</a>
+      <div class="detail">
+        <div>
+          <img
+            alt="Fotografía ilustrativa de Oficios"
+            class="detailimage"
+            src="assets/plantas.jpg"
+          />
+          <div class="sectionhead">
+            <span class="eyebrow">Oficios · ⌖ Presencial</span>
+            <button class="outline" data-fav="plantas">♡ Guardar</button>
+          </div>
+          <h1>Un pequeño huerto en tu balcón</h1>
+          <a class="teacherline" href="profesor-plantas.html">
+            <span class="miniavatar">JP</span>
+            Con Jorge Paredes · Ver perfil ↗
+          </a>
+          <p>
+            Descubre cómo iniciar un huerto en poco espacio. Prepara tu primera
+            maceta y aprende a cuidar una planta aromática.
+          </p>
+          <h2>Esto te llevarás de la clase</h2>
+          <ul>
+            <li>Elegir plantas según la luz disponible.</li>
+            <li>Preparar un sustrato adecuado.</li>
+            <li>Organizar el riego.</li>
+          </ul>
+          <h2>¿Qué necesitas?</h2>
+          <p>Una maceta pequeña. Sustrato y semillas incluidos.</p>
+          <div class="notice">
+            Contenido de demostración. Los profesores, precios y horarios son
+            ficticios; las fotografías son ilustrativas.
+          </div>
+        </div>
+        <section class="panel">
+          <span class="eyebrow">UN NUEVO SABER EMPIEZA AQUÍ</span>
+          <h2>
+            S/ 30
+            <small class="price-caption">por persona</small>
+          </h2>
+          <div class="facts">
+            <div>
+              <small>Duración</small>
+              60 minutos
+            </div>
+            <div>
+              <small>Nivel</small>
+              Principiante
+            </div>
+            <div>
+              <small>Modalidad</small>
+              Presencial
+            </div>
+            <div>
+              <small>Distrito</small>
+              Surco
+            </div>
+          </div>
+          <label for="schedule">Elige un horario de prueba</label>
+          <select id="schedule">
+            <option value="">Seleccionar horario</option>
+            <option>Sábado · 7 nov 2026 · 10:00 a. m.</option>
+            <option>Domingo · 8 nov 2026 · 4:00 p. m.</option>
+          </select>
+          <p class="text-small">Horario de Lima · Fechas demostrativas</p>
+          <button class="primary" id="reserve">Probar reserva →</button>
+          <p class="field-error" id="scheduleerror" role="alert"></p>
+          <p class="access-caption">Sin cobros ni inscripciones reales.</p>
+        </section>
+      </div>
+    </main>
+    <footer>
+      ✺ TAYTA
+      <span>El conocimiento nos conecta.</span>
+    </footer>
+    <div id="toast" role="status"></div>
+    <dialog id="dialog">
+      <button aria-label="Cerrar" class="close">×</button>
+      <div id="dialogcontent"></div>
+    </dialog>
+    <script defer="" src="js/almacenamiento.js?v=20261103-5"></script>
+    <script defer="" src="js/catalogo-local.js?v=20261103-5"></script>
+    <script defer="" src="js/interacciones.js?v=20261103-5"></script>
+  </body>
+</html>

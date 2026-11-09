@@ -1,0 +1,278 @@
+<!doctype html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta
+      content="TAYTA: descubre clases, comparte tu experiencia y aprende algo nuevo. Prototipo interactivo."
+      name="description"
+    />
+    <title>TAYTA · Ensenar</title>
+    <link href="css/estilos.css?v=20261103-5" rel="stylesheet" />
+    <meta content="2026.11.03.5" name="tayta-version" />
+  </head>
+  <body data-pagina="ensenar">
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <header>
+      <a class="brand" href="index.html">
+        <span class="brandmark">✺</span>
+        TAYTA
+        <span class="tagline">EL QUE SABE, ENSEÑA</span>
+      </a>
+      <form action="explorar.html" class="search" id="searchform" method="get">
+        <span>⌕</span>
+        <input
+          aria-label="Buscar clases"
+          id="search"
+          name="q"
+          placeholder="¿Qué te gustaría aprender?"
+        />
+        <kbd>↵</kbd>
+      </form>
+      <a class="teach topteach" href="ensenar.html">Publicar clase ↗</a>
+      <a
+        aria-label="Iniciar sesión"
+        class="account-link"
+        data-account=""
+        href="registro.html"
+      >
+        Iniciar sesión
+      </a>
+    </header>
+    <aside>
+      <nav>
+        <span class="navlabel">DESCUBRE TAYTA</span>
+        <a data-nav="inicio" href="index.html">
+          ⌂
+          <span>Inicio</span>
+        </a>
+        <a data-nav="explorar" href="explorar.html">
+          ⌕
+          <span>Explorar clases</span>
+        </a>
+        <a data-nav="virtual" href="virtual.html">
+          ▣
+          <span>TAYTA Virtual</span>
+        </a>
+        <a data-nav="presencial" href="presencial.html">
+          ⌖
+          <span>TAYTA Presencial</span>
+        </a>
+        <div class="navdivider"></div>
+        <span class="navlabel">TU ESPACIO</span>
+        <a data-nav="favoritos" href="favoritos.html">
+          ♡
+          <span>Mis favoritos</span>
+          <small id="favcount">0</small>
+        </a>
+        <a data-nav="reservas" href="reservas.html">
+          ▦
+          <span>Mis reservas</span>
+        </a>
+        <a data-nav="ensenar" href="ensenar.html">
+          ＋
+          <span>Quiero enseñar</span>
+        </a>
+        <a data-nav="mis-clases" href="mis-clases.html">
+          ▤
+          <span>Mis clases</span>
+        </a>
+      </nav>
+      <div class="sidecard">
+        <span>
+          Lo que sabes
+          <br />
+          puede inspirar.
+        </span>
+        <p>Comparte tu experiencia con alguien más.</p>
+        <a href="ensenar.html">Empieza a enseñar ↗</a>
+      </div>
+      <div class="sidebottom">
+        <button id="contrast">◐ Contraste</button>
+        <button aria-label="Cambiar tamaño de texto" id="textsize">A+</button>
+        <p>
+          Hecho para aprender juntos.
+          <br />
+          <b>Desde Perú, con experiencia.</b>
+        </p>
+      </div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div class="pagehead">
+        <span class="eyebrow">COMPARTE LO QUE SABES</span>
+        <h1>Publica tu clase en un momento.</h1>
+        <p>Cuéntanos qué enseñas, elige cómo y ponle un precio.</p>
+      </div>
+      <p class="notice">
+        Práctica local: tu clase se guardará en este navegador. Para que otras
+        personas puedan verla necesitaremos conectar el servidor.
+      </p>
+      <div class="publisher-info">
+        <span id="publisher-name">
+          Puedes completar el formulario. Al publicar te pediremos un perfil de
+          prueba.
+        </span>
+        <a href="registro.html">Mi perfil →</a>
+      </div>
+      <p class="notice" hidden="" id="edit-status"></p>
+      <form class="editor panel teaching-editor" id="teachform">
+        <h2>¿Qué quieres enseñar?</h2>
+        <label for="title">Nombre de tu clase</label>
+        <input
+          id="title"
+          maxlength="90"
+          name="title"
+          placeholder="Ej. Aprende a preparar una causa limeña"
+          required=""
+          type="text"
+        />
+        <label for="description">¿Qué aprenderán?</label>
+        <textarea
+          id="description"
+          maxlength="1000"
+          name="description"
+          placeholder="Explica en pocas palabras lo que vas a enseñar."
+          required=""
+          rows="3"
+        ></textarea>
+        <div class="formrow">
+          <div>
+            <label for="teachcat">Categoría</label>
+            <select id="teachcat" name="category">
+              <option>Cocina</option>
+              <option>Oficios</option>
+              <option>Arte y costura</option>
+              <option>Tecnología</option>
+              <option>Negocios</option>
+              <option>Idiomas y música</option>
+            </select>
+          </div>
+          <div>
+            <label for="duration">Duración en minutos</label>
+            <input
+              id="duration"
+              max="1440"
+              min="5"
+              name="duration"
+              required=""
+              type="number"
+              value="60"
+            />
+          </div>
+        </div>
+        <label for="cover-file">
+          Foto de la clase
+          <span class="optional">(opcional)</span>
+        </label>
+        <div
+          aria-label="Elegir o arrastrar foto"
+          class="upload-zone"
+          id="cover-drop"
+          role="button"
+          tabindex="0"
+        >
+          <strong>＋ Elegir una foto</strong>
+          <span>También puedes arrastrarla aquí.</span>
+        </div>
+        <input
+          accept="image/jpeg,image/png,image/webp"
+          class="file-input"
+          id="cover-file"
+          type="file"
+        />
+        <p class="field-help">
+          JPG, PNG o WebP · Hasta 8 MB. Puedes publicar sin foto y usar una
+          portada de ejemplo.
+        </p>
+        <p class="field-error" id="cover-error" role="alert"></p>
+        <div class="file-preview" hidden="" id="cover-preview">
+          <span id="cover-name"></span>
+          <button class="outline" id="cover-remove" type="button">
+            Quitar foto
+          </button>
+        </div>
+        <h2>¿Cómo vas a enseñar?</h2>
+        <label for="modality">Modalidad</label>
+        <select id="modality" name="modality">
+          <option value="Virtual">Virtual</option>
+          <option value="Presencial">Presencial</option>
+          <option value="Ambas">Ambas</option>
+        </select>
+        <p class="field-help">
+          Si eliges ambas, el alumno podrá elegir virtual o presencial.
+        </p>
+        <div id="virtual-fields">
+          <label for="price">Precio de la clase virtual (S/)</label>
+          <input
+            id="price"
+            max="10000"
+            min="1"
+            name="virtualPrice"
+            required=""
+            step="0.01"
+            type="number"
+            value="30"
+          />
+          <p class="field-help">
+            Clase en directo. La videollamada se conectará más adelante.
+          </p>
+        </div>
+        <div hidden="" id="locationfield">
+          <label for="teachlocation">Distrito</label>
+          <input
+            id="teachlocation"
+            maxlength="60"
+            name="location"
+            placeholder="Ej. Pueblo Libre"
+            type="text"
+          />
+          <label for="onsite-price">Precio de la clase presencial (S/)</label>
+          <input
+            id="onsite-price"
+            max="10000"
+            min="1"
+            name="onsitePrice"
+            step="0.01"
+            type="number"
+            value="40"
+          />
+        </div>
+        <div class="notice" hidden="" id="profile-required">
+          <strong>Crea tu perfil para continuar.</strong>
+          <p>
+            Solo necesitas un nombre y un correo de ejemplo. Guardaremos el
+            texto de este formulario mientras completas ese paso.
+          </p>
+          <a class="primary" href="registro.html?continuar=ensenar">
+            Crear perfil y volver →
+          </a>
+        </div>
+        <p class="field-error" id="publish-error" role="alert"></p>
+        <div class="form-actions">
+          <button class="primary" id="publish-button" type="submit">
+            Publicar clase →
+          </button>
+          <a class="outline" href="mis-clases.html">Mis clases</a>
+        </div>
+        <p class="field-help">
+          Publicación de prueba en este dispositivo. No hay cobros ni envío a
+          otros usuarios.
+        </p>
+      </form>
+    </main>
+    <footer>
+      ✺ TAYTA
+      <span>El conocimiento nos conecta.</span>
+    </footer>
+    <div id="toast" role="status"></div>
+    <dialog id="dialog">
+      <button aria-label="Cerrar" class="close">×</button>
+      <div id="dialogcontent"></div>
+    </dialog>
+    <script defer="" src="js/almacenamiento.js?v=20261103-5"></script>
+    <script defer="" src="js/catalogo-local.js?v=20261103-5"></script>
+    <script defer="" src="js/interacciones.js?v=20261103-5"></script>
+    <script defer="" src="js/publicar.js?v=20261103-5"></script>
+  </body>
+</html>

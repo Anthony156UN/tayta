@@ -1,0 +1,551 @@
+<!doctype html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta
+      content="TAYTA: descubre clases, comparte tu experiencia y aprende algo nuevo. Prototipo interactivo."
+      name="description"
+    />
+    <title>TAYTA · Explorar</title>
+    <link href="css/estilos.css?v=20261103-5" rel="stylesheet" />
+    <meta content="2026.11.03.5" name="tayta-version" />
+  </head>
+  <body data-pagina="explorar">
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <header>
+      <a class="brand" href="index.html">
+        <span class="brandmark">✺</span>
+        TAYTA
+        <span class="tagline">EL QUE SABE, ENSEÑA</span>
+      </a>
+      <form action="explorar.html" class="search" id="searchform" method="get">
+        <span>⌕</span>
+        <input
+          aria-label="Buscar clases"
+          id="search"
+          name="q"
+          placeholder="¿Qué te gustaría aprender?"
+        />
+        <kbd>↵</kbd>
+      </form>
+      <a class="teach topteach" href="ensenar.html">Publicar clase ↗</a>
+      <a
+        aria-label="Iniciar sesión"
+        class="account-link"
+        data-account=""
+        href="registro.html"
+      >
+        Iniciar sesión
+      </a>
+    </header>
+    <aside>
+      <nav>
+        <span class="navlabel">DESCUBRE TAYTA</span>
+        <a data-nav="inicio" href="index.html">
+          ⌂
+          <span>Inicio</span>
+        </a>
+        <a data-nav="explorar" href="explorar.html">
+          ⌕
+          <span>Explorar clases</span>
+        </a>
+        <a data-nav="virtual" href="virtual.html">
+          ▣
+          <span>TAYTA Virtual</span>
+        </a>
+        <a data-nav="presencial" href="presencial.html">
+          ⌖
+          <span>TAYTA Presencial</span>
+        </a>
+        <div class="navdivider"></div>
+        <span class="navlabel">TU ESPACIO</span>
+        <a data-nav="favoritos" href="favoritos.html">
+          ♡
+          <span>Mis favoritos</span>
+          <small id="favcount">0</small>
+        </a>
+        <a data-nav="reservas" href="reservas.html">
+          ▦
+          <span>Mis reservas</span>
+        </a>
+        <a data-nav="ensenar" href="ensenar.html">
+          ＋
+          <span>Quiero enseñar</span>
+        </a>
+        <a data-nav="mis-clases" href="mis-clases.html">
+          ▤
+          <span>Mis clases</span>
+        </a>
+      </nav>
+      <div class="sidecard">
+        <span>
+          Lo que sabes
+          <br />
+          puede inspirar.
+        </span>
+        <p>Comparte tu experiencia con alguien más.</p>
+        <a href="ensenar.html">Empieza a enseñar ↗</a>
+      </div>
+      <div class="sidebottom">
+        <button id="contrast">◐ Contraste</button>
+        <button aria-label="Cambiar tamaño de texto" id="textsize">A+</button>
+        <p>
+          Hecho para aprender juntos.
+          <br />
+          <b>Desde Perú, con experiencia.</b>
+        </p>
+      </div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div class="pagehead">
+        <span class="eyebrow">DESCUBRE TAYTA</span>
+        <h1>Encuentra tu próxima clase</h1>
+        <p>Pequeñas clases. Nuevas habilidades. Mucho por descubrir.</p>
+      </div>
+      <div class="sectionhead">
+        <div>
+          <h2>Clases para ti</h2>
+          <p id="resultcount">8 clases de demostración</p>
+        </div>
+        <span class="eyebrow">CATÁLOGO DEMO</span>
+      </div>
+      <div class="toolbar">
+        <button class="chip selected" data-filter="todas">Todas</button>
+        <button class="chip" data-filter="presencial">Presenciales</button>
+        <button class="chip" data-filter="virtual">Virtuales</button>
+        <button class="chip" data-filter="grabada">Grabadas</button>
+        <select aria-label="Filtrar por categoría" id="catselect">
+          <option value="">Todas las categorías</option>
+          <option>Cocina</option>
+          <option>Oficios</option>
+          <option>Arte y costura</option>
+          <option>Tecnología</option>
+          <option>Negocios</option>
+          <option>Idiomas y música</option>
+        </select>
+        <select aria-label="Ordenar clases" class="sort" id="sort">
+          <option value="relevancia">Recomendadas</option>
+          <option value="precio">Menor precio</option>
+          <option value="duracion">Menor duración</option>
+        </select>
+      </div>
+      <div id="results">
+        <div class="grid">
+          <article
+            class="card"
+            data-categoria="Cocina"
+            data-distrito="Pueblo Libre"
+            data-duracion="60"
+            data-id="cocina"
+            data-modalidad="ambas"
+            data-posicion="0"
+            data-precio="25"
+          >
+            <div class="cover">
+              <a
+                aria-label="Ver clase: Los secretos de una buena causa limeña"
+                href="clase-cocina.html"
+              >
+                <img
+                  alt="Cocina: fotografía ilustrativa"
+                  loading="lazy"
+                  src="assets/cocina.jpg"
+                />
+              </a>
+              <span class="badge">▣ Virtual o presencial</span>
+              <button
+                aria-label="Guardar en favoritos: Los secretos de una buena causa limeña"
+                aria-pressed="false"
+                class="heart"
+                data-fav="cocina"
+              >
+                ♡
+              </button>
+            </div>
+            <div class="cardbody">
+              <span class="cattext">Cocina</span>
+              <h3>
+                <a href="clase-cocina.html">
+                  Los secretos de una buena causa limeña
+                </a>
+              </h3>
+              <a class="teacherline" href="profesor-cocina.html">
+                <span class="miniavatar">EM</span>
+                Elena Mendoza
+              </a>
+              <div class="cardbottom">
+                <span>◷ 60 min · Pueblo Libre</span>
+                <span class="price">
+                  Desde S/ 25
+                  <small>/ clase</small>
+                </span>
+              </div>
+            </div>
+          </article>
+          <article
+            class="card"
+            data-categoria="Oficios"
+            data-distrito="San Miguel"
+            data-duracion="90"
+            data-id="madera"
+            data-modalidad="presencial"
+            data-posicion="1"
+            data-precio="40"
+          >
+            <div class="cover">
+              <a
+                aria-label="Ver clase: Tu primer proyecto en madera"
+                href="clase-madera.html"
+              >
+                <img
+                  alt="Oficios: fotografía ilustrativa"
+                  loading="lazy"
+                  src="assets/madera.jpg"
+                />
+              </a>
+              <span class="badge">⌖ Presencial</span>
+              <button
+                aria-label="Guardar en favoritos: Tu primer proyecto en madera"
+                aria-pressed="false"
+                class="heart"
+                data-fav="madera"
+              >
+                ♡
+              </button>
+            </div>
+            <div class="cardbody">
+              <span class="cattext">Oficios</span>
+              <h3>
+                <a href="clase-madera.html">Tu primer proyecto en madera</a>
+              </h3>
+              <a class="teacherline" href="profesor-madera.html">
+                <span class="miniavatar">RS</span>
+                Ricardo Salazar
+              </a>
+              <div class="cardbottom">
+                <span>◷ 90 min · San Miguel</span>
+                <span class="price">
+                  S/ 40
+                  <small>/ clase</small>
+                </span>
+              </div>
+            </div>
+          </article>
+          <article
+            class="card"
+            data-categoria="Arte y costura"
+            data-distrito=""
+            data-duracion="60"
+            data-id="costura"
+            data-modalidad="virtual"
+            data-posicion="2"
+            data-precio="25"
+          >
+            <div class="cover">
+              <a
+                aria-label="Ver clase: Dale una segunda vida a tu ropa"
+                href="clase-costura.html"
+              >
+                <img
+                  alt="Arte y costura: fotografía ilustrativa"
+                  loading="lazy"
+                  src="assets/costura.jpg"
+                />
+              </a>
+              <span class="badge">▣ Virtual · programada</span>
+              <button
+                aria-label="Guardar en favoritos: Dale una segunda vida a tu ropa"
+                aria-pressed="false"
+                class="heart"
+                data-fav="costura"
+              >
+                ♡
+              </button>
+            </div>
+            <div class="cardbody">
+              <span class="cattext">Arte y costura</span>
+              <h3>
+                <a href="clase-costura.html">Dale una segunda vida a tu ropa</a>
+              </h3>
+              <a class="teacherline" href="profesor-costura.html">
+                <span class="miniavatar">RH</span>
+                Rosa Huamán
+              </a>
+              <div class="cardbottom">
+                <span>◷ 60 min</span>
+                <span class="price">
+                  S/ 25
+                  <small>/ clase</small>
+                </span>
+              </div>
+            </div>
+          </article>
+          <article
+            class="card"
+            data-categoria="Oficios"
+            data-distrito="Surco"
+            data-duracion="60"
+            data-id="plantas"
+            data-modalidad="presencial"
+            data-posicion="3"
+            data-precio="30"
+          >
+            <div class="cover">
+              <a
+                aria-label="Ver clase: Un pequeño huerto en tu balcón"
+                href="clase-plantas.html"
+              >
+                <img
+                  alt="Oficios: fotografía ilustrativa"
+                  loading="lazy"
+                  src="assets/plantas.jpg"
+                />
+              </a>
+              <span class="badge">⌖ Presencial</span>
+              <button
+                aria-label="Guardar en favoritos: Un pequeño huerto en tu balcón"
+                aria-pressed="false"
+                class="heart"
+                data-fav="plantas"
+              >
+                ♡
+              </button>
+            </div>
+            <div class="cardbody">
+              <span class="cattext">Oficios</span>
+              <h3>
+                <a href="clase-plantas.html">Un pequeño huerto en tu balcón</a>
+              </h3>
+              <a class="teacherline" href="profesor-plantas.html">
+                <span class="miniavatar">JP</span>
+                Jorge Paredes
+              </a>
+              <div class="cardbottom">
+                <span>◷ 60 min · Surco</span>
+                <span class="price">
+                  S/ 30
+                  <small>/ clase</small>
+                </span>
+              </div>
+            </div>
+          </article>
+          <article
+            class="card"
+            data-categoria="Arte y costura"
+            data-distrito=""
+            data-duracion="45"
+            data-id="arte"
+            data-modalidad="grabada"
+            data-posicion="4"
+            data-precio="20"
+          >
+            <div class="cover">
+              <a
+                aria-label="Ver clase: Acuarela: empieza con una hoja en blanco"
+                href="clase-arte.html"
+              >
+                <img
+                  alt="Arte y costura: fotografía ilustrativa"
+                  loading="lazy"
+                  src="assets/arte.jpg"
+                />
+              </a>
+              <span class="badge">▷ Clase grabada</span>
+              <button
+                aria-label="Guardar en favoritos: Acuarela: empieza con una hoja en blanco"
+                aria-pressed="false"
+                class="heart"
+                data-fav="arte"
+              >
+                ♡
+              </button>
+            </div>
+            <div class="cardbody">
+              <span class="cattext">Arte y costura</span>
+              <h3>
+                <a href="clase-arte.html">
+                  Acuarela: empieza con una hoja en blanco
+                </a>
+              </h3>
+              <a class="teacherline" href="profesor-arte.html">
+                <span class="miniavatar">CT</span>
+                Carmen Torres
+              </a>
+              <div class="cardbottom">
+                <span>◷ 45 min</span>
+                <span class="price">
+                  S/ 20
+                  <small>/ clase</small>
+                </span>
+              </div>
+            </div>
+          </article>
+          <article
+            class="card"
+            data-categoria="Tecnología"
+            data-distrito=""
+            data-duracion="60"
+            data-id="web"
+            data-modalidad="virtual"
+            data-posicion="5"
+            data-precio="35"
+          >
+            <div class="cover">
+              <a
+                aria-label="Ver clase: Crea tu primera página web"
+                href="clase-web.html"
+              >
+                <img
+                  alt="Tecnología: fotografía ilustrativa"
+                  loading="lazy"
+                  src="assets/tecnologia.jpg"
+                />
+              </a>
+              <span class="badge">▣ Virtual · programada</span>
+              <button
+                aria-label="Guardar en favoritos: Crea tu primera página web"
+                aria-pressed="false"
+                class="heart"
+                data-fav="web"
+              >
+                ♡
+              </button>
+            </div>
+            <div class="cardbody">
+              <span class="cattext">Tecnología</span>
+              <h3><a href="clase-web.html">Crea tu primera página web</a></h3>
+              <a class="teacherline" href="profesor-web.html">
+                <span class="miniavatar">AQ</span>
+                Andrés Quispe
+              </a>
+              <div class="cardbottom">
+                <span>◷ 60 min</span>
+                <span class="price">
+                  S/ 35
+                  <small>/ clase</small>
+                </span>
+              </div>
+            </div>
+          </article>
+          <article
+            class="card"
+            data-categoria="Negocios"
+            data-distrito=""
+            data-duracion="60"
+            data-id="negocio"
+            data-modalidad="virtual"
+            data-posicion="6"
+            data-precio="30"
+          >
+            <div class="cover">
+              <a
+                aria-label="Ver clase: Ponle precio a lo que haces"
+                href="clase-negocio.html"
+              >
+                <img
+                  alt="Negocios: fotografía ilustrativa"
+                  loading="lazy"
+                  src="assets/negocios.jpg"
+                />
+              </a>
+              <span class="badge">▣ Virtual · programada</span>
+              <button
+                aria-label="Guardar en favoritos: Ponle precio a lo que haces"
+                aria-pressed="false"
+                class="heart"
+                data-fav="negocio"
+              >
+                ♡
+              </button>
+            </div>
+            <div class="cardbody">
+              <span class="cattext">Negocios</span>
+              <h3>
+                <a href="clase-negocio.html">Ponle precio a lo que haces</a>
+              </h3>
+              <a class="teacherline" href="profesor-negocio.html">
+                <span class="miniavatar">PR</span>
+                Patricia Rojas
+              </a>
+              <div class="cardbottom">
+                <span>◷ 60 min</span>
+                <span class="price">
+                  S/ 30
+                  <small>/ clase</small>
+                </span>
+              </div>
+            </div>
+          </article>
+          <article
+            class="card"
+            data-categoria="Idiomas y música"
+            data-distrito=""
+            data-duracion="40"
+            data-id="guitarra"
+            data-modalidad="grabada"
+            data-posicion="7"
+            data-precio="20"
+          >
+            <div class="cover">
+              <a
+                aria-label="Ver clase: Tus primeros acordes de guitarra"
+                href="clase-guitarra.html"
+              >
+                <img
+                  alt="Idiomas y música: fotografía ilustrativa"
+                  loading="lazy"
+                  src="assets/musica.jpg"
+                />
+              </a>
+              <span class="badge">▷ Clase grabada</span>
+              <button
+                aria-label="Guardar en favoritos: Tus primeros acordes de guitarra"
+                aria-pressed="false"
+                class="heart"
+                data-fav="guitarra"
+              >
+                ♡
+              </button>
+            </div>
+            <div class="cardbody">
+              <span class="cattext">Idiomas y música</span>
+              <h3>
+                <a href="clase-guitarra.html">
+                  Tus primeros acordes de guitarra
+                </a>
+              </h3>
+              <a class="teacherline" href="profesor-guitarra.html">
+                <span class="miniavatar">MV</span>
+                Miguel Vásquez
+              </a>
+              <div class="cardbottom">
+                <span>◷ 40 min</span>
+                <span class="price">
+                  S/ 20
+                  <small>/ clase</small>
+                </span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="notice" hidden="" id="sin-resultados">
+          No hay clases que coincidan. Prueba otra búsqueda o categoría.
+        </p>
+      </div>
+    </main>
+    <footer>
+      ✺ TAYTA
+      <span>El conocimiento nos conecta.</span>
+    </footer>
+    <div id="toast" role="status"></div>
+    <dialog id="dialog">
+      <button aria-label="Cerrar" class="close">×</button>
+      <div id="dialogcontent"></div>
+    </dialog>
+    <script defer="" src="js/almacenamiento.js?v=20261103-5"></script>
+    <script defer="" src="js/catalogo-local.js?v=20261103-5"></script>
+    <script defer="" src="js/interacciones.js?v=20261103-5"></script>
+  </body>
+</html>
