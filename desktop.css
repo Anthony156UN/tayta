@@ -1519,3 +1519,89 @@ h2 em {
     transition: none !important;
   }
 }
+.teacher-directory .teacher-feature,
+.teacher-directory .teacher-card {
+  background: var(--cream);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.teacher-directory .teacher-feature {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+}
+.teacher-feature > img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.teacher-feature h2,
+.teacher-directory .section-heading h2 {
+  font:
+    600 2rem Fraunces,
+    serif;
+}
+.teacher-feature .feature-stats,
+.teacher-meta {
+  display: flex;
+  gap: 1rem;
+  margin: 0.8rem 0;
+}
+.teacher-directory .teacher-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+.teacher-photo {
+  position: relative;
+}
+.teacher-photo img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+.teacher-photo > span {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: var(--cream);
+  border-radius: 50%;
+  padding: 3px 9px;
+}
+.teacher-card > div + div {
+  padding: 1rem;
+}
+.teacher-card h3 {
+  font:
+    600 1.35rem Fraunces,
+    serif;
+}
+.teacher-meta,
+.teacher-quote,
+.teacher-craft {
+  color: var(--muted);
+}
+.teacher-directory .button,
+.teacher-card .link-button {
+  font-weight: 700;
+  color: var(--wine);
+  padding: 0.7rem 0;
+}
+.teacher-modal .modal-cover img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.teacher-modal .profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: -26px auto 10px;
+  position: relative;
+}

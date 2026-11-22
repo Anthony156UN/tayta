@@ -1,3 +1,4 @@
+import { TeachersPage, TeacherDetails } from "./teachers";
 import { useMemo, useState } from "react";
 import {
   catalog,
@@ -180,6 +181,9 @@ function Logo({ onClick }: { onClick: () => void }) {
 }
 
 function App() {
+  const [teacher, setTeacher] = useState<(typeof teachers)[number] | null>(
+    null,
+  );
   const [view, setView] = useState<View>("inicio");
   const [dark, setDark] = useState(false);
   const [menu, setMenu] = useState(false);
@@ -271,42 +275,20 @@ function App() {
 
       <main>
         {view === "profesores" && (
-          <section className="page">
-            <div className="page-title">
-              <h1>Nuestros profesores</h1>
-            </div>
-            <div className="card-grid">
-              {Array.from(
-                new Set([
-                  ...teachers.map((t) => t.name),
-                  ...classes.map((c) => c.teacher),
-                ]),
-              ).map((name) => (
-                <article className="panel-card" key={name}>
-                  <h2>{name}</h2>
-                  <p>
-                    {teachers.find((t) => t.name === name)?.craft ||
-                      classes.find((c) => c.teacher === name)?.category}
-                  </p>
-                  {classes.some((c) => c.teacher === name) ? (
-                    <button
-                      className="secondary-button"
-                      onClick={() => {
-                        setQuery(name);
-                        setCategory("Todas");
-                        setMode("Todas");
-                        navigate("explorar");
-                      }}
-                    >
-                      Ver clases
-                    </button>
-                  ) : (
-                    <p>Sin clases disponibles</p>
-                  )}
-                </article>
-              ))}
-            </div>
-          </section>
+          <TeachersPage onTeacher={(t = teachers[0]) => setTeacher(t)} />
+        )}
+        {teacher && (
+          <TeacherDetails
+            teacher={teacher}
+            close={() => setTeacher(null)}
+            findTeacher={() => {
+              setQuery(teacher.name);
+              setCategory("Todas");
+              setMode("Todas");
+              setTeacher(null);
+              navigate("explorar");
+            }}
+          />
         )}
         {view === "inicio" && (
           <Home

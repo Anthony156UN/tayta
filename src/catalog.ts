@@ -206,9 +206,24 @@ export function publications(): typeof catalog {
     return [];
   }
 }
-export function getClasses(mobileFirst = false) {
-  return [
-    ...publications(),
-    ...(mobileFirst ? [...catalog.slice(6), ...catalog.slice(0, 6)] : catalog),
-  ];
+export function getClasses() {
+  return [...publications(), ...catalog];
+}
+export function getTeachers() {
+  const rows = getClasses();
+  const byName = new Map(teachers.map((t) => [t.name, { ...t, classes: 0 }]));
+  for (const c of rows) {
+    const person = byName.get(c.teacher) || {
+      name: c.teacher,
+      craft: c.category,
+      image: c.image,
+      years: "",
+      quote: "",
+      rating: c.rating,
+      classes: 0,
+    };
+    person.classes += 1;
+    byName.set(c.teacher, person);
+  }
+  return [...byName.values()];
 }

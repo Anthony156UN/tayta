@@ -1,3 +1,4 @@
+import { TeacherCard, TeachersPage, TeacherDetails } from "./teachers";
 import { useMemo, useState } from "react";
 
 type IconName =
@@ -137,7 +138,7 @@ import {
   useFavorites,
 } from "./shared";
 
-const classes = catalog.slice(6).concat(catalog.slice(0, 6));
+const classes = catalog;
 const categories = [
   { name: "Arte y oficio", icon: "✦", count: "86 clases" },
   { name: "Cocina", icon: "◌", count: "64 clases" },
@@ -165,7 +166,7 @@ export default function App() {
     setTeacher(t);
     setModal("teacher");
   };
-  const filtered = getClasses(true).filter(
+  const filtered = getClasses().filter(
     (item) =>
       (category === "Todas" || item.category === category) &&
       `${item.title} ${item.teacher}`
@@ -640,37 +641,6 @@ function ClassCard({ item, favorite, toggleFavorite, openReserve }: any) {
   );
 }
 
-function TeacherCard({ teacher, onClick }: any) {
-  return (
-    <article className="teacher-card" onClick={onClick}>
-      <div className="teacher-photo">
-        <img
-          src={teacher.image}
-          alt={teacher.quote ? teacher.name : teacher.craft}
-        />
-        <span>
-          <Icon name="check" size={14} />
-        </span>
-      </div>
-      <div>
-        <div className="rating">
-          <Icon name="star" size={15} fill="currentColor" /> {teacher.rating}
-        </div>
-        <h3>{teacher.name}</h3>
-        <p className="teacher-craft">{teacher.craft}</p>
-        {teacher.quote && <p className="teacher-quote">“{teacher.quote}”</p>}
-        <div className="teacher-meta">
-          <span>{teacher.years}</span>
-          <span>{teacher.classes} clases</span>
-        </div>
-        <button className="link-button">
-          Ver perfil <Icon name="arrow" />
-        </button>
-      </div>
-    </article>
-  );
-}
-
 function ClassesPage({
   search,
   setSearch,
@@ -752,74 +722,6 @@ function ClassesPage({
           <p>Prueba con otro término o categoría.</p>
         </div>
       )}
-    </div>
-  );
-}
-
-function TeachersPage({ onTeacher }: any) {
-  return (
-    <div className="page shell">
-      <div className="page-title">
-        <span className="kicker">MAESTROS DE VIDA</span>
-        <h1>Personas que inspiran</h1>
-        <p>Experiencia, oficio y paciencia para acompañarte en cada paso.</p>
-      </div>
-      <div className="teacher-feature">
-        <img src={photos.teacher1} alt="Elena Quispe, maestra ceramista" />
-        <div>
-          <span className="pill">Profesora de la semana</span>
-          <h2>Elena Quispe</h2>
-          <p className="lead">
-            “La arcilla me enseñó que todo puede volver a empezar.”
-          </p>
-          <p>
-            Maestra ceramista ayacuchana con más de cuatro décadas preservando
-            técnicas tradicionales y creando nuevas formas de compartirlas.
-          </p>
-          <div className="feature-stats">
-            <span>
-              <b>42</b> años enseñando
-            </span>
-            <span>
-              <b>4.9</b> valoración
-            </span>
-            <span>
-              <b>680</b> estudiantes
-            </span>
-          </div>
-          <button className="button" onClick={() => onTeacher()}>
-            Conocer a Elena <Icon name="arrow" />
-          </button>
-        </div>
-      </div>
-      <div className="section-heading">
-        <div>
-          <h2>Conoce a la comunidad</h2>
-          <p>Cada profesor tiene una historia única para compartir.</p>
-        </div>
-      </div>
-      <div className="teacher-grid">
-        {[
-          ...teachers,
-          ...catalog
-            .filter((c) => !teachers.some((t) => t.name === c.teacher))
-            .map((c) => ({
-              name: c.teacher,
-              craft: c.category,
-              image: c.image,
-              quote: "",
-              years: "",
-              rating: c.rating,
-              classes: 1,
-            })),
-        ].map((teacher, i) => (
-          <TeacherCard
-            key={`${teacher.name}${i}`}
-            teacher={teacher}
-            onClick={() => onTeacher(teacher)}
-          />
-        ))}
-      </div>
     </div>
   );
 }
@@ -1037,33 +939,11 @@ function ModalView({
     );
   if (type === "teacher")
     return (
-      <div className="modal-backdrop" onMouseDown={close}>
-        <div
-          className="modal teacher-modal"
-          onMouseDown={(e) => e.stopPropagation()}
-        >
-          <button className="modal-close" onClick={close}>
-            <Icon name="close" />
-          </button>
-          <div className="modal-cover">
-            <img src={photos.workshop} alt="" />
-          </div>
-          <img
-            className="profile-avatar"
-            src={teacher.image}
-            alt={teacher.name}
-          />
-          <span className="kicker">{teacher.craft}</span>
-          <h2>{teacher.name}</h2>
-          <p>{teacher.quote}</p>
-          <p>
-            {teacher.years} · {teacher.rating} estrellas
-          </p>
-          <button className="button full" onClick={findTeacher}>
-            Ver clases de {teacher.name}
-          </button>
-        </div>
-      </div>
+      <TeacherDetails
+        teacher={teacher}
+        close={close}
+        findTeacher={findTeacher}
+      />
     );
   return (
     <div className="modal-backdrop" onMouseDown={close}>
