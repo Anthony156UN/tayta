@@ -1,8 +1,0 @@
-.env
-.env.*
-!.env.example
-*.zip
-node_modules/
-.DS_Store
-Thumbs.db
-.vscode/
