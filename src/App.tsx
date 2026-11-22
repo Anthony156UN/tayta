@@ -1,8 +1,7 @@
 import { TeachersPage, TeacherDetails } from "./teachers";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
-  catalog,
-  photos,
+  getTeachers,
   teachers,
   getClasses,
   heroImage,
@@ -21,7 +20,6 @@ type View =
   | "explorar"
   | "favoritos"
   | "reservas"
-  | "perfil"
   | "panel";
 type IconName =
   | "search"
@@ -159,7 +157,6 @@ function Icon({
   );
 }
 
-const classes = catalog;
 const categories = [
   { name: "Artesanía", subtitle: "Tejido, cerámica y más", symbol: "✣" },
   { name: "Cocina", subtitle: "Recetas con historia", symbol: "♨" },
@@ -195,6 +192,9 @@ function App() {
     null,
   );
   const [selected, setSelected] = useState(1);
+  const [name, setName] = useState(
+    () => localStorage.getItem("tayta.nombre") || "",
+  );
   const [toast, setToast] = useState("");
 
   const navigate = (next: View) => {
@@ -231,6 +231,7 @@ function App() {
         <div className="header-inner">
           <Logo onClick={() => navigate("inicio")} />
           <nav
+            id="main-menu"
             className={menu ? "desktop-nav open" : "desktop-nav"}
             aria-label="Navegación principal"
           >
@@ -247,6 +248,8 @@ function App() {
               Explorar clases
             </button>
             <button onClick={() => navigate("profesores")}>Profesores</button>
+            <button onClick={() => navigate("favoritos")}>Favoritos</button>
+            <button onClick={() => navigate("reservas")}>Mis reservas</button>
             <button className="teach-link" onClick={() => navigate("panel")}>
               Quiero enseñar
             </button>
@@ -260,14 +263,17 @@ function App() {
               <Icon name={dark ? "sun" : "moon"} />
             </button>
             <button className="login-button" onClick={() => setModal("auth")}>
-              <Icon name="user" size={18} /> Iniciar sesión
+              <Icon name="user" size={18} /> {name || "Iniciar sesión"}
             </button>
             <button
               className="menu-button"
               onClick={() => setMenu(!menu)}
-              aria-label="Abrir menú"
+              aria-label={menu ? "Cerrar menú" : "Abrir menú"}
+              aria-controls="main-menu"
+              aria-expanded={menu}
             >
               <Icon name={menu ? "close" : "menu"} />
+              <span>Menú</span>
             </button>
           </div>
         </div>
@@ -296,6 +302,7 @@ function App() {
             setQuery={setQuery}
             navigate={navigate}
             setCategory={setCategory}
+            setMode={setMode}
             favorites={favorites}
             toggleFavorite={toggleFavorite}
             openBooking={openBooking}
@@ -332,9 +339,23 @@ function App() {
             <BookingList />
           </div>
         )}
-        {view === "perfil" && <TeacherProfile openBooking={openBooking} />}
+
         {view === "panel" && (
-          <Dashboard onPublish={() => setModal("publish")} notify={notify} />
+          <section className="page">
+            <div className="dashboard-head">
+              <div>
+                <h1>Quiero enseñar</h1>
+                <p>Publica una clase o administra las que ya compartiste.</p>
+              </div>
+              <button
+                className="primary-button"
+                onClick={() => setModal("publish")}
+              >
+                Publicar una clase
+              </button>
+            </div>
+            <ManageClasses />
+          </section>
         )}
       </main>
 
@@ -350,19 +371,9 @@ function App() {
         </div>
         <div>
           <strong>Comunidad</strong>
-          <button onClick={() => navigate("panel")}>Enseña en TAYTA</button>
-          <button>Centro de ayuda</button>
-        </div>
-        <div>
-          <strong>Recibe historias con sabiduría</strong>
-          <div className="subscribe">
-            <input aria-label="Correo electrónico" placeholder="tu@correo.pe" />
-            <button
-              onClick={() => notify("Gracias por sumarte a la comunidad")}
-            >
-              Unirme
-            </button>
-          </div>
+          <button onClick={() => navigate("panel")}>Quiero enseñar</button>
+          <button onClick={() => navigate("favoritos")}>Favoritos</button>
+          <button onClick={() => navigate("reservas")}>Mis reservas</button>
         </div>
         <small>© 2026 TAYTA. Hecho con respeto por los saberes del Perú.</small>
       </footer>
@@ -373,8 +384,8 @@ function App() {
             ["inicio", "home", "Inicio"],
             ["explorar", "compass", "Explorar"],
             ["favoritos", "heart", "Favoritos"],
-            ["reservas", "calendar", "Reservas"],
-            ["panel", "user", "Mi cuenta"],
+            ["reservas", "calendar", "Mis reservas"],
+            ["panel", "plus", "Quiero enseñar"],
           ] as [View, IconName, string][]
         ).map(([v, i, l]) => (
           <button
@@ -415,13 +426,14 @@ function App() {
         />
       )}
       {modal === "auth" && (
-        <Modal
-          type={modal}
-          selected={classes.find((c) => c.id === selected)!}
+        <Access
+          name={name}
           close={() => setModal(null)}
-          notify={(m) => {
+          save={(value: string) => {
+            localStorage.setItem("tayta.nombre", value);
+            setName(value);
             setModal(null);
-            notify(m);
+            notify(value ? "Perfil de práctica abierto" : "Sesión cerrada");
           }}
         />
       )}
@@ -440,12 +452,15 @@ function Home({
   setQuery,
   navigate,
   setCategory,
+  setMode,
   favorites,
   toggleFavorite,
   openBooking,
 }: any) {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    setMode("Todas");
+    setCategory("Todas");
     navigate("explorar");
   };
   return (
@@ -480,7 +495,8 @@ function Home({
               <span>JS</span>
               <span>ER</span>
             </div>
-            <strong>+2,500</strong> encuentros que ya dejan huella
+            <strong>{getTeachers().length} profesores</strong> comparten sus
+            saberes
           </div>
         </div>
         <div className="hero-visual">
@@ -494,7 +510,7 @@ function Home({
             </span>
             <div>
               <strong>Aprende con confianza</strong>
-              <small>Profesores verificados por TAYTA</small>
+              <small>Clases virtuales y presenciales</small>
             </div>
           </div>
           <div className="image-caption">
@@ -512,7 +528,15 @@ function Home({
               ¿Qué te gustaría <em>aprender hoy?</em>
             </h2>
           </div>
-          <button className="text-link" onClick={() => navigate("explorar")}>
+          <button
+            className="text-link"
+            onClick={() => {
+              setQuery("");
+              setMode("Todas");
+              setCategory("Todas");
+              navigate("explorar");
+            }}
+          >
             Ver todas <Icon name="arrow" size={18} />
           </button>
         </div>
@@ -522,6 +546,8 @@ function Home({
               className="category-card"
               key={c.name}
               onClick={() => {
+                setQuery("");
+                setMode("Todas");
                 setCategory(c.name);
                 navigate("explorar");
               }}
@@ -545,21 +571,31 @@ function Home({
               Aprende de los <em>mejores maestros</em>
             </h2>
           </div>
-          <button className="text-link" onClick={() => navigate("explorar")}>
+          <button
+            className="text-link"
+            onClick={() => {
+              setQuery("");
+              setMode("Todas");
+              setCategory("Todas");
+              navigate("explorar");
+            }}
+          >
             Explorar todo <Icon name="arrow" size={18} />
           </button>
         </div>
         <div className="card-grid">
-          {classes.slice(0, 3).map((c, i) => (
-            <ClassCard
-              key={c.id}
-              item={c}
-              index={i}
-              favorite={favorites.includes(c.id)}
-              toggleFavorite={toggleFavorite}
-              openBooking={openBooking}
-            />
-          ))}
+          {getClasses()
+            .slice(0, 3)
+            .map((c, i) => (
+              <ClassCard
+                key={c.id}
+                item={c}
+                index={i}
+                favorite={favorites.includes(c.id)}
+                toggleFavorite={toggleFavorite}
+                openBooking={openBooking}
+              />
+            ))}
         </div>
       </section>
 
@@ -569,9 +605,6 @@ function Home({
             src={classImage}
             alt="Maestros peruanos compartiendo música, cocina y cerámica"
           />
-          <button aria-label="Reproducir historia">
-            <Icon name="play" filled />
-          </button>
         </div>
         <div className="story-copy">
           <span className="eyebrow">UNA COMUNIDAD CON PROPÓSITO</span>
@@ -588,20 +621,25 @@ function Home({
           </p>
           <div className="impact">
             <span>
-              <strong>180+</strong>
-              <small>maestros activos</small>
+              <strong>{getTeachers().length}</strong>
+              <small>profesores en TAYTA</small>
             </span>
             <span>
-              <strong>4.9/5</strong>
-              <small>valoración promedio</small>
+              <strong>{getClasses().length}</strong>
+              <small>clases disponibles</small>
             </span>
             <span>
-              <strong>12</strong>
-              <small>regiones del Perú</small>
+              <strong>
+                {new Set(getClasses().map((c) => c.category)).size}
+              </strong>
+              <small>categorías</small>
             </span>
           </div>
-          <button className="primary-button" onClick={() => navigate("perfil")}>
-            Conoce nuestra historia <Icon name="arrow" size={18} />
+          <button
+            className="primary-button"
+            onClick={() => navigate("profesores")}
+          >
+            Conoce a los profesores <Icon name="arrow" size={18} />
           </button>
         </div>
       </section>
@@ -615,7 +653,7 @@ function Home({
             ingresos a tu ritmo. Nosotros te acompañamos en cada paso.
           </p>
           <button className="cream-button" onClick={() => navigate("panel")}>
-            Quiero ser profesor <Icon name="arrow" size={18} />
+            Quiero enseñar <Icon name="arrow" size={18} />
           </button>
         </div>
         <div className="cta-quote">
@@ -689,7 +727,7 @@ function ClassCard({
             Desde <strong>S/ {item.price}</strong> / clase
           </span>
           <button onClick={() => openBooking(item.id)}>
-            Ver clase <Icon name="arrow" size={16} />
+            Reservar <Icon name="arrow" size={16} />
           </button>
         </div>
       </div>
@@ -709,6 +747,14 @@ function Explore({
   toggleFavorite,
   openBooking,
 }: any) {
+  const [order, setOrder] = useState("recomendadas");
+  const sorted = [...filtered].sort((a, b) =>
+    order === "precio"
+      ? a.price - b.price
+      : order === "valoracion"
+        ? b.rating - a.rating
+        : 0,
+  );
   return (
     <div className="page">
       <div className="page-title">
@@ -738,7 +784,7 @@ function Explore({
         </select>
       </div>
       <div className="chips">
-        {["Todas", ...new Set(classes.map((c) => c.category))].map((c) => (
+        {["Todas", ...new Set(getClasses().map((c) => c.category))].map((c) => (
           <button
             className={category === c ? "active" : ""}
             onClick={() => setCategory(c)}
@@ -750,13 +796,18 @@ function Explore({
       </div>
       <div className="results-head">
         <strong>{filtered.length} clases encontradas</strong>
-        <span>
-          Ordenar: <b>Recomendadas</b>
-        </span>
+        <label>
+          Ordenar por{" "}
+          <select value={order} onChange={(e) => setOrder(e.target.value)}>
+            <option value="recomendadas">Recomendadas</option>
+            <option value="precio">Menor precio</option>
+            <option value="valoracion">Mejor valoración</option>
+          </select>
+        </label>
       </div>
       {filtered.length ? (
         <div className="card-grid explore-grid">
-          {filtered.map((c: any, i: number) => (
+          {sorted.map((c: any, i: number) => (
             <ClassCard
               key={c.id}
               item={c}
@@ -824,202 +875,64 @@ function Collection({
   );
 }
 
-function TeacherProfile({ openBooking }: any) {
+function Access({
+  name,
+  save,
+  close,
+}: {
+  name: string;
+  save: (name: string) => void;
+  close: () => void;
+}) {
+  const [value, setValue] = useState(name);
   return (
-    <div className="page profile-page">
-      <div className="profile-cover">
-        <div
-          className="profile-photo"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
-        <div className="profile-intro">
-          <span className="verified-label">
-            <Icon name="check" size={14} /> Identidad verificada
-          </span>
-          <h1>Rosa Quispe</h1>
-          <p className="profile-role">Maestra tejedora · Cusco</p>
-          <div className="profile-stats">
-            <span>
-              <Icon name="star" filled /> 4.9 <small>(38 reseñas)</small>
-            </span>
-            <span>
-              <Icon name="book" /> 126 estudiantes
-            </span>
-            <span>
-              <Icon name="clock" /> 42 años de experiencia
-            </span>
-          </div>
-          <button className="primary-button" onClick={() => openBooking(1)}>
-            Reservar una clase
-          </button>
-        </div>
-      </div>
-      <div className="profile-content">
-        <article>
-          <h2>Mi historia</h2>
-          <p>
-            Aprendí a tejer junto a mi madre y mi abuela en Chinchero. Cada
-            diseño guarda un relato de nuestra comunidad, de la tierra y de
-            quienes estuvieron antes. Hoy comparto estas técnicas para que
-            viajen hacia nuevas manos sin perder su raíz.
-          </p>
-          <h2>Lo que aprenderás</h2>
-          <ul className="learning-list">
-            <li>
-              <Icon name="check" />
-              Preparación de fibras y tintes naturales
-            </li>
-            <li>
-              <Icon name="check" />
-              Lectura de símbolos y patrones andinos
-            </li>
-            <li>
-              <Icon name="check" />
-              Técnicas base del telar de cintura
-            </li>
-          </ul>
-        </article>
-        <aside>
-          <h3>Conoce a Rosa</h3>
-          <div
-            className="video-preview"
-            style={{ backgroundImage: `url(${heroImage})` }}
+    <div className="modal-backdrop">
+      <form
+        className="modal"
+        role="dialog"
+        aria-label="Perfil de práctica"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (value.trim()) save(value.trim());
+        }}
+      >
+        <button
+          type="button"
+          className="modal-close"
+          aria-label="Cerrar"
+          onClick={close}
+        >
+          ×
+        </button>
+        <h2>{name ? "Mi perfil" : "Iniciar sesión"}</h2>
+        <p>
+          Perfil de práctica en este navegador. Tus publicaciones y reservas se
+          guardan en este equipo.
+        </p>
+        <label>
+          Tu nombre
+          <input
+            required
+            maxLength={60}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            autoComplete="given-name"
+          />
+        </label>
+        <button disabled={!value.trim()} className="primary-button full">
+          {name ? "Guardar nombre" : "Continuar"}
+        </button>
+        {name && (
+          <button
+            type="button"
+            className="secondary-button full"
+            onClick={() => save("")}
           >
-            <button>
-              <Icon name="play" filled />
-            </button>
-          </div>
-          <p>“Te voy a enseñar con paciencia, como me enseñaron a mí.”</p>
-        </aside>
-      </div>
-    </div>
-  );
-}
-
-function Dashboard({ onPublish, notify }: any) {
-  return (
-    <div className="dashboard page">
-      <div className="dashboard-head">
-        <div>
-          <span className="eyebrow">PANEL DEL PROFESOR</span>
-          <h1>
-            Buenos días, <em>Rosa</em>
-          </h1>
-          <p>Tu experiencia sigue inspirando. Aquí tienes el resumen de hoy.</p>
-        </div>
-        <button className="primary-button" onClick={onPublish}>
-          <Icon name="plus" /> Publicar una clase
-        </button>
-      </div>
-      <div className="metrics">
-        <div>
-          <span>
-            <Icon name="calendar" />
-          </span>
-          <small>Clases este mes</small>
-          <strong>12</strong>
-          <em>+3 vs. mayo</em>
-        </div>
-        <div>
-          <span>
-            <Icon name="user" />
-          </span>
-          <small>Nuevos estudiantes</small>
-          <strong>28</strong>
-          <em>+18% este mes</em>
-        </div>
-        <div>
-          <span>
-            <Icon name="star" />
-          </span>
-          <small>Valoración</small>
-          <strong>4.9</strong>
-          <em>38 reseñas</em>
-        </div>
-        <div>
-          <span>
-            <Icon name="chart" />
-          </span>
-          <small>Ingresos del mes</small>
-          <strong>S/ 1,840</strong>
-          <em>+12% este mes</em>
-        </div>
-      </div>
-      <div className="dashboard-grid">
-        <section className="panel-card">
-          <div className="panel-title">
-            <h2>Próximas clases</h2>
-            <button>Ver calendario</button>
-          </div>
-          {[
-            "Hoy · 4:00 p. m.",
-            "Jue 20 · 10:00 a. m.",
-            "Sáb 22 · 11:30 a. m.",
-          ].map((d, i) => (
-            <div className="student-row" key={d}>
-              <span className="mini-avatar">{["LM", "AS", "PV"][i]}</span>
-              <div>
-                <strong>
-                  {["Lucía Mendoza", "Andrés Salazar", "Paola Vega"][i]}
-                </strong>
-                <small>{d} · Tejido andino</small>
-              </div>
-              <button onClick={() => notify("Mensaje abierto")}>Mensaje</button>
-            </div>
-          ))}
-        </section>
-        <ManageClasses />
-      </div>
-    </div>
-  );
-}
-
-function Modal({ type, selected, close, notify }: any) {
-  return (
-    <div
-      className="modal-backdrop"
-      onMouseDown={(e) => e.target === e.currentTarget && close()}
-    >
-      <div className="modal" role="dialog" aria-modal="true">
-        <button className="modal-close" onClick={close} aria-label="Cerrar">
-          <Icon name="close" />
-        </button>
-        {type === "auth" && (
-          <>
-            <span className="eyebrow">BIENVENIDO A TAYTA</span>
-            <h2>Entra a tu comunidad</h2>
-            <p>Acceso de práctica. Usa datos de ejemplo.</p>
-            <div className="role-switch">
-              <button className="active">Soy estudiante</button>
-              <button>Soy profesor</button>
-            </div>
-            <label>
-              Correo electrónico
-              <input type="email" placeholder="nombre@correo.pe" />
-            </label>
-            <label>
-              Contraseña
-              <input type="password" placeholder="Tu contraseña" />
-            </label>
-            <button
-              className="primary-button full"
-              onClick={() => notify("Acceso de demostración")}
-            >
-              Iniciar sesión
-            </button>
-            <button className="forgot">¿Olvidaste tu contraseña?</button>
-            <div className="divider">o</div>
-            <button
-              className="secondary-button full"
-              onClick={() => notify("Registro iniciado")}
-            >
-              Crear una cuenta
-            </button>
-          </>
+            Cerrar sesión
+          </button>
         )}
-      </div>
+      </form>
     </div>
   );
 }
-
 export default App;
