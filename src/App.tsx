@@ -4,6 +4,7 @@ import {
   getTeachers,
   teachers,
   getClasses,
+  photos,
   heroImage,
   classImage,
 } from "./catalog";
@@ -15,12 +16,7 @@ import {
   useFavorites,
 } from "./shared";
 type View =
-  | "profesores"
-  | "inicio"
-  | "explorar"
-  | "favoritos"
-  | "reservas"
-  | "panel";
+  "profesores" | "inicio" | "explorar" | "favoritos" | "reservas" | "panel";
 type IconName =
   | "search"
   | "sun"
@@ -491,19 +487,30 @@ function Home({
           </form>
           <div className="trust">
             <div className="avatar-stack">
-              <span>RQ</span>
-              <span>JS</span>
-              <span>ER</span>
+              {[photos.teacher1, photos.teacher2, photos.teacher3].map(
+                (src, i) => (
+                  <picture key={src}>
+                    <source media="(max-width: 767px)" srcSet={src} />
+                    <img
+                      src={[heroImage, classImage, photos.teacher2][i]}
+                      alt=""
+                    />
+                  </picture>
+                ),
+              )}
             </div>
             <strong>{getTeachers().length} profesores</strong> comparten sus
             saberes
           </div>
         </div>
         <div className="hero-visual">
-          <img
-            src={heroImage}
-            alt="Maestra peruana enseñando tejido andino a una estudiante"
-          />
+          <picture className="hero-photo">
+            <source media="(max-width: 767px)" srcSet={photos.hero} />
+            <img
+              src={heroImage}
+              alt="Un encuentro para aprender un oficio entre generaciones"
+            />
+          </picture>
           <div className="hero-note">
             <span>
               <Icon name="star" size={17} filled />
@@ -514,8 +521,7 @@ function Home({
             </div>
           </div>
           <div className="image-caption">
-            <strong>Rosa, 68 años</strong>
-            <span>Maestra tejedora · Cusco</span>
+            <strong>Saberes que pasan de generación en generación</strong>
           </div>
         </div>
       </section>
@@ -601,10 +607,26 @@ function Home({
 
       <section className="story">
         <div className="story-image">
-          <img
-            src={classImage}
-            alt="Maestros peruanos compartiendo música, cocina y cerámica"
-          />
+          <picture className="story-cover">
+            <source media="(max-width: 767px)" srcSet={photos.workshop} />
+            <img
+              src={classImage}
+              alt="Maestros compartiendo su oficio"
+              loading="lazy"
+            />
+          </picture>
+          <div className="workshop-photos" aria-hidden="true">
+            {[photos.pottery, photos.craft].map((src) => (
+              <picture key={src}>
+                <source media="(max-width: 767px)" srcSet={src} />
+                <img
+                  loading="lazy"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                  alt=""
+                />
+              </picture>
+            ))}
+          </div>
         </div>
         <div className="story-copy">
           <span className="eyebrow">UNA COMUNIDAD CON PROPÓSITO</span>

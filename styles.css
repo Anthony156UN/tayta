@@ -1679,3 +1679,64 @@ h2 em {
     max-width: 155px;
   }
 }
+.hero-photo,
+.story-cover {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.hero-photo img,
+.story-cover img,
+.workshop-photos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.workshop-photos {
+  display: none;
+}
+.avatar-stack picture {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--cream);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar-stack picture + picture {
+  margin-left: -7px;
+}
+.avatar-stack img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 767px) {
+  .hero-visual {
+    min-height: 0;
+    aspect-ratio: 4/3;
+  }
+  .hero-photo img {
+    object-position: 50% 40%;
+  }
+  .story-image {
+    min-height: 0;
+    aspect-ratio: 1.2;
+  }
+  .story-cover {
+    bottom: 35%;
+  }
+  .workshop-photos {
+    position: absolute;
+    bottom: 0;
+    height: 35%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    border-top: 3px solid var(--cream);
+  }
+  .workshop-photos picture {
+    min-height: 0;
+  }
+}
